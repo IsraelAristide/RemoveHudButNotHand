@@ -57,7 +57,7 @@ public class removegui {
 
     private void setup(final FMLCommonSetupEvent event) {
         LOGGER.info("GUI HAVETH BEENETH REMOVETH");
-        defguiscale = 3;
+        defguiscale = Minecraft.getInstance().options.guiScale;
     }
 
     @SubscribeEvent
