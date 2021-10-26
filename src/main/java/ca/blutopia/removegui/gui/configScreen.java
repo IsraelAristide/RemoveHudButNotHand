@@ -1,16 +1,15 @@
-package ca.blutopia.removegui;
+package ca.blutopia.removegui.gui;
 
+import ca.blutopia.removegui.ModConfigHolder;
+import ca.blutopia.removegui.removegui;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Option;
 import net.minecraft.client.Options;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.client.gui.components.OptionsList;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -23,7 +22,9 @@ public class configScreen extends Screen {
 
     private OptionsList optionlist;
     private Checkbox checkbox;
+    private CycleButton<String> cycle;
     private Checkbox checkbox2;
+    private Checkbox checkbox3;
 
     public configScreen(removegui main) {
         super(new TextComponent("Remove Gui but not hand settings"));
@@ -33,7 +34,22 @@ public class configScreen extends Screen {
     @Override
     protected  void init() {
 
-        this.checkbox2 = new Checkbox(20, 20, 20, 20, new TextComponent("Remove HUD but not Hand"), ModConfigHolder.COMMON.toggleMod.get(), true ) {
+        this.checkbox3 = new Checkbox(120, 220, 20, 20, new TextComponent("Remove Hand"), ModConfigHolder.COMMON.removeHand.get(), true) {
+            @Override
+            public void onPress() {
+                boolean togglemod = ModConfigHolder.COMMON.removeHand.get();
+
+                if (togglemod) {
+                    ModConfigHolder.COMMON.removeHand.set(false);
+                } else {
+                    ModConfigHolder.COMMON.removeHand.set(true);
+                }
+
+                super.onPress();
+            }
+        };
+
+        this.checkbox2 = new Checkbox(120, 120, 20, 20, new TextComponent("Remove HUD but not Hand"), ModConfigHolder.COMMON.toggleMod.get(), true ) {
             @Override
             public void onPress() {
                 boolean togglemod = ModConfigHolder.COMMON.toggleMod.get();
@@ -43,10 +59,12 @@ public class configScreen extends Screen {
                 } else {
                     ModConfigHolder.COMMON.toggleMod.set(true);
                 }
+
+                super.onPress();
             }
         };
 
-        this.checkbox = new Checkbox(20, 20, 20, 20, new TextComponent("Outline Blocks when looking at them"), ModConfigHolder.COMMON.highlightBlocks.get(), true) {
+        this.checkbox = new Checkbox(120, 20, 20, 20, new TextComponent("Outline Blocks when looking at them"), ModConfigHolder.COMMON.highlightBlocks.get(), true) {
 
             @Override
             public void onPress() {
@@ -85,9 +103,16 @@ public class configScreen extends Screen {
             public AbstractWidget createButton(Options p_91719_, int p_91720_, int p_91721_, int p_91722_) {
                 return checkbox2;
             }
+
         });
 
-        this.addWidget(checkbox);
+        optionlist.addBig(new Option("Remove Hand") {
+            @Override
+            public AbstractWidget createButton(Options p_91719_, int p_91720_, int p_91721_, int p_91722_) {
+                return checkbox3;
+            }
+        });
+
         this.addRenderableWidget(new Button((this.width - 200)/2, this.height - 26, 200, 20, new TextComponent("Done"), button -> this.onClose()));
 
     }

@@ -1,5 +1,6 @@
 package ca.blutopia.removegui;
 
+import ca.blutopia.removegui.gui.configScreen;
 import com.mojang.blaze3d.platform.Window;
 
 import net.minecraft.client.KeyMapping;
@@ -61,6 +62,11 @@ public class removegui
             event.setCanceled(true);
         }
 
+    }
+
+    @SubscribeEvent
+    public void RenderHandEvent(RenderHandEvent event) {
+        event.setCanceled(ModConfigHolder.COMMON.removeHand.get());
     }
 
     @SubscribeEvent

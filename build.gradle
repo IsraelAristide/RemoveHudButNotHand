@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0.2'
+version = '1.0.3'
 group = 'ca.blutopia.removegui' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'removegui'
 
@@ -149,7 +149,7 @@ jar {
         attributes([
                 "Specification-Title"     : "removegui",
                 "Specification-Vendor"    : "blutopia",
-                "Specification-Version"   : "1.0.2", // We are version 1 of ourselves
+                "Specification-Version"   : "1.0.3", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "blutopia",

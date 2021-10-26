@@ -9,16 +9,18 @@ public class ModConfigHolder {
     public static class Common {
         private static final boolean highlightBlocksDefault = true;
         private static final boolean toggleModDefault = false;
+        private static final boolean removeHandDefault = false;
 
         public final ConfigValue<Boolean> highlightBlocks;
         public final ConfigValue<Boolean> toggleMod;
+        public final ConfigValue<Boolean> removeHand;
 
 
         public Common(ForgeConfigSpec.Builder builder) {
             builder.push("Config");
             this.highlightBlocks = builder.comment("Enable Block Highlights").define("Highlight Blocks", highlightBlocksDefault);
             this.toggleMod = builder.comment("Remove GUI but not Hand").define("Enable Mod", toggleModDefault);
-
+            this.removeHand = builder.comment("Remove Hand but not GUI").define("Remove Hand", removeHandDefault);
             builder.pop();
         }
 
