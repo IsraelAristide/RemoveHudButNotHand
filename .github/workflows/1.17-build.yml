@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+name: 1.17 gradle build
 
 on:
   push:
